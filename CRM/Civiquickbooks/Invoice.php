@@ -573,12 +573,15 @@ class CRM_Civiquickbooks_Invoice {
         $tmp = array(
           'Id' => $i . '',
           'LineNum' => $i,
-          'Description' => $line_item_description,
+          'Description' => "Advance CTE Member Dues for July 1, 2019 – June 30, 2020.   Membership dues are non-transferable and non-refundable.",
           'Amount' => sprintf('%.5f', $lineTotal),
           'DetailType' => 'SalesItemLineDetail',
           'SalesItemLineDetail' => array(
             'ItemRef' => array(
               'value' => $line_item_ref,
+            ),
+            'ClassRef' => array(
+              'value' => 19,
             ),
             'UnitPrice' => $lineTotal / $line_item['qty'] * 1.00,
             'Qty' => $line_item['qty'] * 1,
@@ -627,9 +630,11 @@ class CRM_Civiquickbooks_Invoice {
       $new_invoice += array(
         'TxnDate' => $receive_date,
         'DueDate' => $due_date,
-        'DocNumber' => 'Civi-' . $db_contribution['id'],
+        'AutoDocNumber' => 1,
+        'AllowOnlineCreditCardPayment' => 1,
+	      'AllowOnlineACHPayment' => 1,
         'CustomerMemo' => array(
-          'value' => $db_contribution['contribution_source'],
+          'value' => "Please note our legal business name is National Association of State Directors of Career Technical Education.  Our dba is Advance CTE.  Our EIN is 52-1646898. \n Please mail all payments to:  Advance CTE \n 8484 Georgia Ave, Ste 620 \n Silver Spring, MD 20910",
         ),
         'Line' => $line_items,
         'CustomerRef' => array(
